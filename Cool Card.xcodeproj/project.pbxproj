@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		2A868DE92295F5BD005DD170 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A868DE82295F5BD005DD170 /* AppDelegate.swift */; };
-		2A868DEB2295F5BD005DD170 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A868DEA2295F5BD005DD170 /* ViewController.swift */; };
+		2A868DEB2295F5BD005DD170 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A868DEA2295F5BD005DD170 /* ListViewController.swift */; };
 		2A868DEE2295F5BD005DD170 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A868DEC2295F5BD005DD170 /* Main.storyboard */; };
 		2A868DF02295F5BE005DD170 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A868DEF2295F5BE005DD170 /* Assets.xcassets */; };
 		2A868DF32295F5BE005DD170 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A868DF12295F5BE005DD170 /* LaunchScreen.storyboard */; };
+		2A868DFB2295F9B1005DD170 /* CoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A868DFA2295F9B1005DD170 /* CoolCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2A868DE52295F5BD005DD170 /* Cool Card.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cool Card.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A868DE82295F5BD005DD170 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2A868DEA2295F5BD005DD170 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2A868DEA2295F5BD005DD170 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		2A868DED2295F5BD005DD170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2A868DEF2295F5BE005DD170 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A868DF22295F5BE005DD170 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A868DF42295F5BE005DD170 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A868DFA2295F9B1005DD170 /* CoolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoolCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +57,8 @@
 			isa = PBXGroup;
 			children = (
 				2A868DE82295F5BD005DD170 /* AppDelegate.swift */,
-				2A868DEA2295F5BD005DD170 /* ViewController.swift */,
+				2A868DFA2295F9B1005DD170 /* CoolCell.swift */,
+				2A868DEA2295F5BD005DD170 /* ListViewController.swift */,
 				2A868DEC2295F5BD005DD170 /* Main.storyboard */,
 				2A868DEF2295F5BE005DD170 /* Assets.xcassets */,
 				2A868DF12295F5BE005DD170 /* LaunchScreen.storyboard */,
@@ -135,7 +138,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A868DEB2295F5BD005DD170 /* ViewController.swift in Sources */,
+				2A868DFB2295F9B1005DD170 /* CoolCell.swift in Sources */,
+				2A868DEB2295F5BD005DD170 /* ListViewController.swift in Sources */,
 				2A868DE92295F5BD005DD170 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

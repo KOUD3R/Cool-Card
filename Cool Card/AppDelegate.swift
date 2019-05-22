@@ -13,9 +13,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        let listViewController = ListViewController(collectionViewLayout: layout)
+        listViewController.title = "Cool Card"
+        
+        let navigationController = UINavigationController(rootViewController: listViewController)
+                
+        window?.rootViewController = navigationController
+        
         return true
     }
 
