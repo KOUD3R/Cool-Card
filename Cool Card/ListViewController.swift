@@ -24,6 +24,8 @@ class ListViewController: UICollectionViewController {
     private var coolCell: CoolCell?
     private var hiddenCells: [CoolCell] = []
     
+    private var animator: UIViewPropertyAnimator?
+    
     override var prefersStatusBarHidden: Bool {
         return isStatusBarHidden
     }
@@ -65,52 +67,61 @@ class ListViewController: UICollectionViewController {
         let dampingRatio: CGFloat = 0.8
         let initialVelocity = CGVector.zero
         let springParameters = UISpringTimingParameters(dampingRatio: dampingRatio, initialVelocity: initialVelocity)
-        let animator = UIViewPropertyAnimator(duration: 0.5, timingParameters: springParameters)
+        animator = UIViewPropertyAnimator(duration: 0.5, timingParameters: springParameters)
         
+        guard let animator = animator else { return }
+
         if let selectedCell = coolCell {
-            navigationController?.setNavigationBarHidden(false, animated: true)
-            isStatusBarHidden = false
-
-            animator.addAnimations {
-                selectedCell.collapse()
-                
-                for cell in self.hiddenCells {
-                    cell.show()
-                }
-            }
-            
-            animator.addCompletion { (_) in
-                self.coolCell = nil
-                self.hiddenCells.removeAll()
-                
-                collectionView.isScrollEnabled = true
-            }
-            
+            collapseCells(selectedCell: selectedCell, animator: animator)
         } else {
-            navigationController?.setNavigationBarHidden(true, animated: true)
-            isStatusBarHidden = true
-
-            let selectedCell = collectionView.cellForItem(at: indexPath) as! CoolCell
-            let selectedCellFrame = selectedCell.frame
-            hiddenCells = collectionView.visibleCells.map { $0 as! CoolCell }.filter { $0 != selectedCell }
-
-            animator.addAnimations {
-                selectedCell.expand(in: collectionView)
-                
-                for cell in self.hiddenCells {
-                    cell.hide(in: collectionView, fromFrame: selectedCellFrame)
-                }
-            }
-            
-            coolCell = selectedCell
-            
-            collectionView.isScrollEnabled = false
+            expandCell(indexPath: indexPath, animator: animator)
         }
         
         animator.addAnimations {
             self.setNeedsStatusBarAppearanceUpdate()
         }
         animator.startAnimation()
+    }
+    
+    private func collapseCells(selectedCell: CoolCell, animator: UIViewPropertyAnimator) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        isStatusBarHidden = false
+        
+        animator.addAnimations {
+            selectedCell.collapse()
+            
+            for cell in self.hiddenCells {
+                cell.show()
+            }
+        }
+        
+        animator.addCompletion { (_) in
+            self.coolCell = nil
+            self.hiddenCells.removeAll()
+            
+            self.collectionView.isScrollEnabled = true
+        }
+    }
+    
+    private func expandCell(indexPath: IndexPath, animator: UIViewPropertyAnimator) {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        isStatusBarHidden = true
+        
+        let selectedCell = collectionView.cellForItem(at: indexPath) as! CoolCell
+        let selectedCellFrame = selectedCell.frame
+        hiddenCells = collectionView.visibleCells.map { $0 as! CoolCell }.filter { $0 != selectedCell }
+        
+        animator.addAnimations {
+            selectedCell.expand(in: self.collectionView)
+            
+            for cell in self.hiddenCells {
+                cell.hide(in: self.collectionView, fromFrame: selectedCellFrame)
+            }
+        }
+        
+        coolCell = selectedCell
+        
+        collectionView.isScrollEnabled = false
     }
 }
 
@@ -140,6 +151,17 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
     
     /* ⛳️ Why not: willTransitionToNewCollection? It doesn't work on iPad. So use this: */
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        collectionView?.collectionViewLayout.invalidateLayout()
+        if let selectedCell = coolCell {
+            selectedCell.collapse()
+            
+            navigationController?.setNavigationBarHidden(false, animated: true)
+            isStatusBarHidden = false
+            
+            self.coolCell = nil
+            self.hiddenCells.removeAll()
+            
+            self.collectionView.isScrollEnabled = true
+        }
+        self.collectionView?.collectionViewLayout.invalidateLayout()
     }
 }
