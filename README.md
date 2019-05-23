@@ -5,4 +5,5 @@ Thanks to this [tutorial.](https://stormotion.io/blog/how-to-make-a-modified-app
 <img src="https://github.com/KOUD3R/Cool-Card/blob/master/CoolCard.gif" width="270" height="480" />
 
 ### To-do
-- [ ] Fix landscape orientation animation
+- [X] Fix landscape orientation animation
+- [ ] Fix iPad animation
