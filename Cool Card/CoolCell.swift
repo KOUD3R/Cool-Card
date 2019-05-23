@@ -19,6 +19,8 @@ class CoolCell: UICollectionViewCell {
     var initialFrame: CGRect?
     var initialCornerRadius: CGFloat?
     
+    var coolContentOffset = CGPoint(x: 0, y: 0)
+    
     var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
     }
@@ -50,18 +52,18 @@ class CoolCell: UICollectionViewCell {
 extension CoolCell {
     // Animations start here! ⛳️
     func expand(in collectionView: UICollectionView) {
-        initialFrame = self.frame
-        initialCornerRadius = self.contentView.layer.cornerRadius
+        initialFrame = frame
+        initialCornerRadius = layer.cornerRadius
         
-        self.contentView.layer.cornerRadius = 0
-        self.frame = CGRect(x: 0, y: collectionView.contentOffset.y, width: screenWidth, height: screenHeight)
+        layer.cornerRadius = 0
+        frame = CGRect(x: 0, y: collectionView.contentOffset.y, width: collectionView.frame.width, height: collectionView.frame.height + 20)
         
         layoutIfNeeded()
     }
     
     func collapse() {
-        self.contentView.layer.cornerRadius = initialCornerRadius ?? self.contentView.layer.cornerRadius
-        self.frame = initialFrame ?? self.frame
+        layer.cornerRadius = initialCornerRadius ?? layer.cornerRadius
+        frame = initialFrame ?? frame
         
         initialFrame = nil
         initialCornerRadius = nil
@@ -70,7 +72,7 @@ extension CoolCell {
     }
     
     func show() {
-        self.frame = initialFrame ?? self.frame
+        frame = initialFrame ?? frame
         
         initialFrame = nil
         
@@ -78,9 +80,9 @@ extension CoolCell {
     }
     
     func hide(in collectionView: UICollectionView, fromFrame: CGRect) {
-        initialFrame = self.frame
+        initialFrame = frame
         
-        let currentY = self.frame.origin.y
+        let currentY = frame.origin.y
         let newY: CGFloat
         
         if currentY < fromFrame.origin.y {
@@ -88,7 +90,7 @@ extension CoolCell {
             newY = collectionView.contentOffset.y - offset
         } else {
             let offset = currentY - fromFrame.maxY
-            newY = collectionView.contentOffset.y + screenHeight + offset
+            newY = collectionView.frame.height + frame.height + offset
         }
         
         self.frame.origin.y = newY
