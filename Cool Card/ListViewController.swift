@@ -138,7 +138,8 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: cellWidth, height: 50)
     }
     
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+    /* ⛳️ Why not: willTransitionToNewCollection? It doesn't work on iPad. So use this: */
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         collectionView?.collectionViewLayout.invalidateLayout()
     }
 }

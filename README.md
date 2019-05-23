@@ -6,4 +6,5 @@ Thanks to this [tutorial.](https://stormotion.io/blog/how-to-make-a-modified-app
 
 ### To-do
 - [X] Fix landscape orientation animation
-- [ ] Fix iPad animation
+- [X] Fix iPad animation
+- [ ] Fix orientation changes when CoolCell is expanded

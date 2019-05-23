@@ -56,7 +56,7 @@ extension CoolCell {
         initialCornerRadius = layer.cornerRadius
         
         layer.cornerRadius = 0
-        frame = CGRect(x: 0, y: collectionView.contentOffset.y, width: collectionView.frame.width, height: collectionView.frame.height + 20)
+        frame = CGRect(x: 0, y: collectionView.contentOffset.y, width: collectionView.frame.width, height: collectionView.frame.height + 24)
         
         layoutIfNeeded()
     }
