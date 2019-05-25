@@ -84,6 +84,8 @@ class ListViewController: UICollectionViewController {
     }
     
     private func collapseCells(selectedCell: CoolCell, animator: UIViewPropertyAnimator) {
+        selectedCell.isUserInteractionEnabled = false
+
         navigationController?.setNavigationBarHidden(false, animated: true)
         isStatusBarHidden = false
         
@@ -99,6 +101,7 @@ class ListViewController: UICollectionViewController {
             self.coolCell = nil
             self.hiddenCells.removeAll()
             
+            selectedCell.isUserInteractionEnabled = true
             self.collectionView.isScrollEnabled = true
         }
     }
@@ -109,6 +112,8 @@ class ListViewController: UICollectionViewController {
         
         let selectedCell = collectionView.cellForItem(at: indexPath) as! CoolCell
         let selectedCellFrame = selectedCell.frame
+        selectedCell.isUserInteractionEnabled = false
+
         hiddenCells = collectionView.visibleCells.map { $0 as! CoolCell }.filter { $0 != selectedCell }
         
         animator.addAnimations {
@@ -117,6 +122,9 @@ class ListViewController: UICollectionViewController {
             for cell in self.hiddenCells {
                 cell.hide(in: self.collectionView, fromFrame: selectedCellFrame)
             }
+        }
+        animator.addCompletion { (_) in
+            selectedCell.isUserInteractionEnabled = true
         }
         
         coolCell = selectedCell
