@@ -19,8 +19,6 @@ class CoolCell: UICollectionViewCell {
     var initialFrame: CGRect?
     var initialCornerRadius: CGFloat?
     
-    var coolContentOffset = CGPoint(x: 0, y: 0)
-    
     var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
     }
@@ -56,8 +54,8 @@ extension CoolCell {
         initialCornerRadius = layer.cornerRadius
         
         layer.cornerRadius = 0
-        frame = CGRect(x: 0, y: collectionView.contentOffset.y, width: collectionView.frame.width, height: collectionView.frame.height + 24)
-        
+
+        frame = CGRect(x: 0, y: collectionView.contentOffset.y, width: collectionView.frame.width, height: collectionView.frame.height - collectionView.contentOffset.y)
         layoutIfNeeded()
     }
     
